@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <style>
+    /* Add your CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #b7ec62;
+      margin: 0;
+      padding: 0;
+    }
+
+    #app {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #2269cc;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    h1 {
+      color: #cef508;
+      background-color: darkblue;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .task-text {
+      flex-grow: 1;
+      text-align: left;
+    }
+
+    .task-completed {
+      color: #4CAF50;
+      font-weight: bold;
+    }
+
+    .delete-button {
+      background-color: #FF5733;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    .delete-button:hover {
+      background-color: #E84100;
+    }
+
+    .add-task {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .add-task input[type="text"] {
+      flex-grow: 1;
+      padding: 8px;
+    }
+
+    .add-task button {
+      background-color: #045817;
+      color: #09010e;
+      border: none;
+      padding: 8px 15px;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    .add-task button:hover {
+      background-color: #045817;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>Todo App</h1>
+
+    <div class="add-task">
+      <input type="text" v-model="newTask" @keyup.enter="addTask">
+      <button @click="addTask">Add Task</button>
+    </div>
+
+    <ul>
+      <li v-for="(task, index) in tasks" :key="index">
+        <span class="task-text" :class="{ 'task-completed': task.completed }">{{ task.text }}</span>
+        <button class="delete-button" @click="deleteTask(index)">Delete</button>
+      </li>
+    </ul>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.2.1/dist/vue.global.min.js"></script>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          newTask: '',
+          tasks: [],
+        };
+      },
+      methods: {
+        addTask() {
+          if (this.newTask.trim() !== '') {
+            this.tasks.push({ text: this.newTask, completed: false });
+            this.newTask = '';
+          }
+        },
+        deleteTask(index) {
+          this.tasks.splice(index, 1);
+        },
+      },
+    });
+
+    app.mount('#app');
+  </script>
+</body>
+</html>

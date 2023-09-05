@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue 3 Concepts Example</title>
+  <style>
+    
+    body {
+      font-family: sans-serif;
+      color: rgb(36, 10, 100);
+      margin: 10px;
+      background: #86d4e6;
+    }
+
+    h1 {
+      font-family: Arial;
+      color: rgb(95, 213, 182);
+      margin: 10px;
+      background: #071417;
+    }
+
+    h2 {
+      font-family: Arial;
+      color: rgb(101, 126, 226);
+      margin: 10px;
+      background: #071417;
+    }
+    #app {
+      width: 100%;
+      height: 100%;
+    }
+
+    input {
+      width: 200px;
+      height: 30px;
+      border: 1px solid rgb(27, 9, 85);
+    }
+
+    p {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+  
+    <div>
+      <h1>Conditional Rendering</h1>
+      
+      <!-- v-if-else -->
+      <div v-if="type === 'A'">
+        true
+      </div>
+    
+      <div v-else>
+        false
+      </div>
+      
+      <!-- v-show -->
+      <h2>USING V.SHOW TO PRINT MESSAGE</h2>
+      <p v-show="showMessage">Hello Boss!</p>
+      
+      <!-- v-for -->
+      <h2>LIST OF VEGETABLES</h2>
+      <ul>
+        <li v-for="item in items">{{ item }}</li>
+      </ul>
+      
+      <!-- v-if with v-for -->
+      <h2>ADULT OR NOT</h2>
+      <div v-for="user in users" :key="user.id">
+        <h3>
+          {{ user.name }}
+          <span v-if="user.age >= 18">Adult</span>
+          <span v-else>Under 18</span>
+        </h3>
+      </div>
+    </div>
+
+    <!-- Form Input Handling Examples -->
+    <div class="form-input-handling">
+      <h2>Form Input Handling</h2>
+      
+      <!-- Two-way binding with v-model -->
+      <input type="text" v-model="inputText" style="width: 200px; height: 30px; border: 1px solid rgb(27, 9, 85);">
+      <p>Input Text: {{ inputText }}</p>
+    </div>
+  </div>
+
+  <!-- Vue.js loading -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.2.1/dist/vue.global.min.js"></script>
+
+  <script>
+    // Initialize Vue app
+    const app = Vue.createApp({
+      data() {
+        return {
+          type: 'X',
+          showMessage: true,
+          items: ['Lettuce', 'Onion', 'Corn'],
+
+          
+          users: [
+            { id: 1, name: 'Ishan:', age: 19 },
+            { id: 2, name: 'Pranjay:', age: 17 },
+            { id: 3, name: 'Tanveer:', age: 20 },
+          ],
+          inputText: '',
+        };
+      },
+    });
+
+    // Mount the app to the #app element
+    app.mount('#app');
+  </script>
+</body>
+</html>
